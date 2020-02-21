@@ -17,12 +17,6 @@
 @optional
 @end
 
-@interface BarcodeDetector : NSObject <Detector>
-@end
-
-@interface FaceDetector : NSObject <Detector>
-@end
-
 @interface ImageLabeler : NSObject <Detector>
 @end
 

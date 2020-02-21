@@ -22,7 +22,8 @@ An SDK that brings Google's machine learning expertise to Android and iOS apps i
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.dependency 'Firebase/Core'
-  s.dependency 'Firebase/MLVision'
+  s.dependency 'Firebase/MLVisionLabelModel'
+  s.dependency 'Firebase/MLVisionTextModel'
   s.ios.deployment_target = '9.0'
   s.static_framework = true
 

@@ -45,14 +45,10 @@ static NSMutableDictionary<NSNumber *, id<Detector>> *detectors;
 }
 
 - (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-  if ([@"BarcodeDetector#detectInImage" isEqualToString:call.method] ||
-      [@"FaceDetector#processImage" isEqualToString:call.method] ||
-      [@"ImageLabeler#processImage" isEqualToString:call.method] ||
+  if ([@"ImageLabeler#processImage" isEqualToString:call.method] ||
       [@"TextRecognizer#processImage" isEqualToString:call.method]) {
     [self handleDetection:call result:result];
-  } else if ([@"BarcodeDetector#close" isEqualToString:call.method] ||
-             [@"FaceDetector#close" isEqualToString:call.method] ||
-             [@"ImageLabeler#close" isEqualToString:call.method] ||
+  } else if ([@"ImageLabeler#close" isEqualToString:call.method] ||
              [@"TextRecognizer#close" isEqualToString:call.method]) {
     NSNumber *handle = call.arguments[@"handle"];
     [detectors removeObjectForKey:handle];
@@ -69,11 +65,7 @@ static NSMutableDictionary<NSNumber *, id<Detector>> *detectors;
   NSNumber *handle = call.arguments[@"handle"];
   id<Detector> detector = detectors[handle];
   if (!detector) {
-    if ([call.method hasPrefix:@"BarcodeDetector"]) {
-      detector = [[BarcodeDetector alloc] initWithVision:[FIRVision vision] options:options];
-    } else if ([call.method hasPrefix:@"FaceDetector"]) {
-      detector = [[FaceDetector alloc] initWithVision:[FIRVision vision] options:options];
-    } else if ([call.method hasPrefix:@"ImageLabeler"]) {
+    if ([call.method hasPrefix:@"ImageLabeler"]) {
       detector = [[ImageLabeler alloc] initWithVision:[FIRVision vision] options:options];
     } else if ([call.method hasPrefix:@"TextRecognizer"]) {
       detector = [[TextRecognizer alloc] initWithVision:[FIRVision vision] options:options];
